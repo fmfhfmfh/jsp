@@ -18,7 +18,7 @@ public class RangerServiceTest {
 	// 테스트 메서드는 테스트하려는 메서드 이름 + 접미어 Test
 	// getRangers ==> getRangersTest
 	
-	// 테스트 코드의 통과 조건 : 
+	// 테스트 코드의 통과 조건 :  
 	// 1. 테스트 메서드 실행시 assert 구문을 모두 통과
 	// 2. 에러가 없으면 통과
 	

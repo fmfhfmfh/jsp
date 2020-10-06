@@ -9,15 +9,25 @@
 <script>
 	$(function(){
 		$('input[type="submit"]').on('click', function(){
-			if($("input[name='request']:checked").val() == 'GET'){
-// 				$("form[method]").val('GET')
-				out.print($("form[method]").attr())
-			}else if($("input[name='request']:checked").val() == 'POST'){
-// 				$("form[method]").val('POST')
-				out.print($("form[method]").attr())
-			}
+			type = $("input[name='request']:checked").val()
+			$('form').attr('method',type);
+// 			if($("input[name='request']:checked").val() == 'GET'){
+// 				$('#change').attr('method','GET')
+// 			}else if($("input[name='request']:checked").val() == 'POST'){
+// 				$('#change')attr('method','POST')
+// 			}
 		})
-	})
+
+		
+// 		   $(function(){
+// 		      $('.radio').on('click',function(){
+// 		          type = $('input[name="selectType"]:checked').val();
+// 		          $('form').attr('method',type);
+		          
+// 		      })
+// 		   })
+		
+	})	
 </script>
 
 </head>
@@ -43,7 +53,7 @@
 	 <%-- action : 요청을 보낼 경로 
 	      method : 요청방식 (form에서는 GET, POST 두가지만 가능하며 DEFAULT는 GET)
 	 --%>
-	 <form action="<%=request.getContextPath() %>/request/RequestResponse.jsp" method="GET">
+	 <form action="<%=request.getContextPath() %>/request/RequestResponse.jsp" id="change" method="GET">
 		 user id : <input type="text" name="userId" value="브라운"><br>
 		 user id : <input type="text" name="userId" value="샐리"><br>
 		 password : <input type="password" name="pass" value="pass1234"><br>
