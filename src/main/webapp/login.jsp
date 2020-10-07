@@ -2,18 +2,65 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+<script src="<%=request.getContextPath() %>/js/js.cookie-2.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	function getCookieValue(cookieName){
-		cookies = document.cookie.split("; ");
 		result = "";
+		var cookies = document.cookie.split("; ");
 		for(i = 0; i < cookies.length; i++){
 			cookieArr = cookies[i].split("=");
-			if(cookieArr[0].equals(cookies[0])){
-				result = cookieArr[1];
+			if(cookieArr[0] == cookieName){
+				 result = cookieArr[1];
 			}
 		}
-		console.log(result);
+		return result;
 	}
+	
+	function setCookie(cookieName, cookieValue, expires){
+		
+// 		"USERID=brown; path=/; expires=Wed, 07 Oct 2020 00:38:35 GMT;"
+		var today = new Date();
+		// 현재 날짜에서 미래로 + expires 만큼 한 날짜 구하기
+		today.setDate(today.getDate() + expires);
+		document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + today.toGMTString();
+		console.log(document.cookie)
+	}
+
+	// 해당쿠기의 expires속성을 과거 날짜로 변경
+	function deleteCookie(cookieName){
+		setCookie(cookieName, "", -1);
+	}
+
+
+	$(function(){
+// 		if(getCookieValue("REMEMBERME") == 'Y'){
+// 			$('input[name="remember"]').prop('checked', true);
+// 			$('#inputEmail').attr("value", getCookieValue("USERID"));
+// 		}
+		if(Cookies.get("REMEMBERME") == 'Y'){
+			$('input[type=checkbox]').prop('checked', true);
+			$('#inputEmail').val(Cookies.get("USERID"));
+		}
+
+
+		// sign in 버튼이 클릭 되었을 댸 이벤트 핸들러
+		$('button').on('click', function(){
+			email = $('#inputEmail').val();
+			if($('input[type=checkbox]').prop('checked') == true){
+				Cookies.set("REMEMBERME",'Y');
+				Cookies.set("USERID", email);
+			}else{
+				Cookies.remove("REMEMBERME");
+				Cookies.remove("USERID");
+			}
+			//submit
+			$('form').submit();
+		})
+	
+		
+	})
+		
 	
 
 </script>
@@ -40,18 +87,18 @@
   <body>
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" action="<%=request.getContextPath() %>/login" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" name="userId" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me" name="remember"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button">Sign in</button>
       </form>
 
     </div> <!-- /container -->

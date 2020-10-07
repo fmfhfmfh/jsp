@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 public class CookieSplitTest {
 
 	@Test
-	public void getCookieValueTest() {
+	public void getCookieValueSuccessTest() {
 		
 		/***Given : 주어진 상황 기술***/
 		CookieSplit cookieSplit = new CookieSplit();
@@ -23,5 +23,18 @@ public class CookieSplitTest {
 		assertEquals(result, "brown");
 		assertEquals(result2, "Y");
 		assertEquals(result3, "t");
+	}
+	
+	@Test
+	public void getCookieValueFailTest() {
+		
+		/***Given : 주어진 상황 기술***/
+		CookieSplit cookieSplit = new CookieSplit();
+		
+		/***When : 행위***/
+		String result = cookieSplit.getCookieValue("PASSWORD");
+		
+		/***Then : 결과***/
+		assertEquals(result, "");
 	}
 }
