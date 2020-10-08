@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.or.ddit.member.model.MemberVO;
+import kr.or.ddit.member.service.MemberService;
+import kr.or.ddit.member.service.MemberServiceI;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -32,18 +36,32 @@ public class LoginServlet extends HttpServlet {
 		
 		logger.debug("userId : {}, password : {}", userId, password);
 		
-		//쿠키 정보
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			logger.debug("name : {}, value : {}", cookie.getName(), cookie.getValue());
-			
+		MemberServiceI memberService = new MemberService();
+		MemberVO memberVo = memberService.getMember(userId);
+		
+		// db에 등록된 회원이 없거나 비밀번호가 틀린 경우(login page)
+		if(memberVo == null || !memberVo.getPassword().equals(password)) {
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+		}
+		// 비밀번호가 일치하는 경우(main page)
+		else if(memberVo.getPassword().equals(password)) {
+			request.getSession().setAttribute("S_MEMBER", memberVo);
+			request.getRequestDispatcher("/main.jsp").forward(request, response);
 		}
 		
-		Cookie cookie = new Cookie("SERVERCOOKIE", "COOKIEVALUE");
-		cookie.setMaxAge(60*60*24);
 		
-		response.addCookie(cookie);
 		
+//		//쿠키 정보
+//		Cookie[] cookies = request.getCookies();
+//		for (Cookie cookie : cookies) {
+//			logger.debug("name : {}, value : {}", cookie.getName(), cookie.getValue());
+//			
+//		}
+//		
+//		Cookie cookie = new Cookie("SERVERCOOKIE", "COOKIEVALUE");
+//		cookie.setMaxAge(60*60*24);
+//		
+//		response.addCookie(cookie);
 	}
 }
 
