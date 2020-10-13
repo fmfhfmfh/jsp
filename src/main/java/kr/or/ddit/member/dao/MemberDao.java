@@ -26,6 +26,12 @@ public class MemberDao implements MemberDaoI{
 		
 		MemberVO memberVo = sqlSession.selectOne("member.getMember", userId);
 		
+		
+//		sqlSession.commit();
+//		sqlSession.rollback();
+		
+		sqlSession.close();
+		
 		return memberVo;
 	}
 
@@ -35,6 +41,8 @@ public class MemberDao implements MemberDaoI{
 		
 		List<MemberVO> list = sqlSession.selectList("member.selectAllMember");
 
+		sqlSession.close();
+		
 		return list;
 	}
 
