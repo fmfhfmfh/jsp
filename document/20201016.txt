@@ -1,0 +1,11 @@
+기존 : page 파라미터만 받고 있음, 디폴트 1
+변경 : page 파라미터만 받고 있음, 디폴트 1
+     ** 추가
+     pageSize가 파라미터 추가, 디폴트 5
+     
+memberDao, memberService selectMemberPageList(int page)
+				-->		 selectMemberPageList(PageVO)     
+				
+member.xml
+
+MemeberDaoTest, MemberServiceTest								

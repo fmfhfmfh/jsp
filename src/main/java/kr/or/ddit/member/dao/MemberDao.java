@@ -1,9 +1,11 @@
 package kr.or.ddit.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.db.MybatisUtil;
 import kr.or.ddit.member.model.MemberVO;
 
@@ -44,6 +46,18 @@ public class MemberDao implements MemberDaoI{
 		sqlSession.close();
 		
 		return list;
+	}
+
+	@Override
+	public List<MemberVO> selectMemberPageList(SqlSession sqlSession, PageVO pv) {
+		
+		return sqlSession.selectList("member.selectMemberPageList", pv);
+	}
+
+	@Override
+	public int selectMemberTotalCnt(SqlSession sqlSession) {
+		
+		return sqlSession.selectOne("member.selectMemberTotalCnt");
 	}
 
 }
