@@ -9,8 +9,8 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			접속을 안했을 때 :        ==> []
-			접속을 했을 때 : [brown] ==> [brown] 
+<!-- 			접속을 안했을 때 :        ==> [] -->
+<!-- 			접속을 했을 때 : [brown] ==> [brown]  -->
 			<a class="navbar-brand" href="#">JSP/SPRING
 					<c:if test="${S_MEMBER.userid != null}">[${S_MEMBER.userid}]</c:if>
 			</a>
