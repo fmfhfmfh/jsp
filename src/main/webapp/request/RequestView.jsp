@@ -11,6 +11,7 @@
 		$('input[type="submit"]').on('click', function(){
 			type = $("input[name='request']:checked").val()
 			$('form').attr('method',type);
+			
 // 			if($("input[name='request']:checked").val() == 'GET'){
 // 				$('#change').attr('method','GET')
 // 			}else if($("input[name='request']:checked").val() == 'POST'){
