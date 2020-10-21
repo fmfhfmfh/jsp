@@ -19,6 +19,19 @@
 <title>Jsp</title>
 
 <%@ include file="/layout/commonLib.jsp" %>
+
+<script>
+	$(document).ready(function(){
+		$("#memberList tr").on("click", function(){
+			var userid = $(this).data("userid");
+			console.log("userid : " + userid);
+
+			document.location="/member?userid=" + userid;
+		});
+	});
+</script>
+
+
 </head>
 
 <body>
@@ -44,15 +57,17 @@
 					<th>사용자 별명</th>
 					<th>등록일시</th>
 				</tr>
-				<c:forEach items="${list}" var="member">
-					<tr>
-						<td>${member.userid }</td>
-						<td>${member.usernm }</td>
-						<td>${member.alias }</td>
-						<!-- format : yyyy-MM-dd -->
-						<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd"/></td>
-					</tr>
-				</c:forEach>
+				<tbody id="memberList">
+					<c:forEach items="${list}" var="member">
+						<tr data-userid="${member.userid }">
+							<td>${member.userid }</td>
+							<td>${member.usernm }</td>
+							<td>${member.alias }</td>
+							<!-- format : yyyy-MM-dd -->
+							<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd"/></td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 
