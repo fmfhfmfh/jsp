@@ -1,7 +1,9 @@
 package kr.or.ddit.member.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +13,9 @@ import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
 
-@WebServlet("/member")
-public class MemberServlet extends HttpServlet {
+@WebServlet("/profileImg")
+public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
 	private MemberServiceI memberService;
 	
 	@Override
@@ -23,16 +24,32 @@ public class MemberServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// userid 파라미터 받기
+		// response context-type 설정
+		response.setContentType("image/png");
+		
+		// 사용자 아이디 파라미터 확인하고
 		String userid = request.getParameter("userid");
 		
-		// service 객체 호출
+		// db에서 사용자 filename 확인
 		MemberVO mv = memberService.getMember(userid);
 		
-		request.setAttribute("mv", mv);
+		// 경로 확인 후 파일 입출력을 통해 응답생성
+		// 파일 읽기
+		// 응답 생성
+//		mv.getFilename(); // 파일 경로
+		FileInputStream fis = new FileInputStream(mv.getFilename());
 		
-		// jsp로 위임
-		request.getRequestDispatcher("/member/member.jsp").forward(request, response);
+		ServletOutputStream sos = response.getOutputStream();
+		
+		byte[] buffer = new byte[512];
+		
+		while(fis.read(buffer) != -1) {
+			sos.write(buffer);
+		}
+		
+		fis.close();
+		sos.flush();
+		sos.close();
 		
 	}
 }

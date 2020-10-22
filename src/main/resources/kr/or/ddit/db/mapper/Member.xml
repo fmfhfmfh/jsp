@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
   <select id="getMember" resultType="MemberVO" parameterType="String">
-    SELECT * FROM users WHERE userId = #{userId}
+    SELECT * FROM users WHERE userId = #{userid}
   </select>
   
   <select id="selectAllMember" resultType="MemberVO">
