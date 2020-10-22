@@ -15,6 +15,19 @@
 <title>Jsp</title>
 
 <%@ include file="/layout/commonLib.jsp" %>
+
+<script>
+	$(document).ready(function(){
+		$("#upbutton").on("click", function(){
+			var userid = "${mv.userid}";
+			console.log("userid : " + userid);
+
+			document.location="/memberUpdate?userid=" + userid;
+		});
+	});
+</script>
+
+
 </head>
 
 <body>
@@ -28,8 +41,7 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-vcx 
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" enctype="multipart/form-data">
 <!-- 					<div class="form-group"> -->
 <!-- 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label> -->
 <!-- 						<div class="col-sm-10"> -->
@@ -44,6 +56,7 @@ vcx
 <%-- 							<img src="${cp}/profile/${mv.filename}"/> --%>
 							
 							<img src="${cp}/profileImg?userid=${mv.userid}"/>
+							<input type="hidden" name="realfilename" value="${cp}/profileImg?userid=${mv.userid}"/>
 							
 						</div>
 					</div>
@@ -51,48 +64,55 @@ vcx
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
 						<div class="col-sm-10">
-							<label class="control-label">${mv.userid}</label>
+							<label class="control-label" >${mv.userid}</label>
+							<input type="hidden" name="userid" value="${mv.userid}"/>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 이름</label>
 						<div class="col-sm-10">
-							<label class="control-label">${mv.usernm}</label>
+							<label class="control-label" >${mv.usernm}</label>
+							<input type="hidden" name="usernm" value="${mv.usernm}"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">별명</label>
 						<div class="col-sm-10">
-							<label class="control-label">${mv.alias}</label>
+							<label class="control-label" >${mv.alias}</label>
+							<input type="hidden" name="alias" value="${mv.alias}"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">Password</label>
 						<div class="col-sm-10">
-							<label class="control-label">********</label>
+							<label class="control-label" >********</label>
+							<input type="hidden" name="pass" value="${mv.pass }"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">주소</label>
 						<div class="col-sm-10">
-							<label class="control-label">${mv.addr1}</label>
+							<label class="control-label" >${mv.addr1}</label>
+							<input type="hidden" name="addr1" value="${mv.addr1}"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">상세주소</label>
 						<div class="col-sm-10">
-							<label class="control-label">${mv.addr2}</label>
+							<label class="control-label" >${mv.addr2}</label>
+							<input type="hidden" name="addr2" value="${mv.addr2}"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">우편번호</label>
 						<div class="col-sm-10">
-							<label class="control-label">${mv.zipcode}</label>
+							<label class="control-label" >${mv.zipcode}</label>
+							<input type="hidden" name="zipcode" value="${mv.zipcode}"/>
 						</div>
 					</div>
 					
@@ -106,7 +126,7 @@ vcx
 					
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default">사용자 수정</button>
+							<button type="button" id="upbutton" class="btn btn-default">사용자 수정</button>
 						</div>
 					</div>
 				</form>

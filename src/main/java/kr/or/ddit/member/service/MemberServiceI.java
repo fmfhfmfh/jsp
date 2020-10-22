@@ -12,4 +12,10 @@ public interface MemberServiceI {
 	List<MemberVO> selectAllMember();
 	
 	Map<String, Object> selectMemberPageList(PageVO pv);
+	
+	int insertMember(MemberVO mv);
+	
+	int deleteMember(String userid);
+	
+	int updateMember(MemberVO mv);
 }

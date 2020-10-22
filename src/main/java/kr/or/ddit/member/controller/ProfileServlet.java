@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
@@ -17,6 +20,7 @@ import kr.or.ddit.member.service.MemberServiceI;
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberServiceI memberService;
+	private static final Logger logger = LoggerFactory.getLogger(ProfileServlet.class);
 	
 	@Override
 	public void init() throws ServletException {
@@ -24,6 +28,7 @@ public class ProfileServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// response context-type 설정
 		response.setContentType("image/png");
 		
@@ -38,7 +43,6 @@ public class ProfileServlet extends HttpServlet {
 		// 응답 생성
 //		mv.getFilename(); // 파일 경로
 		FileInputStream fis = new FileInputStream(mv.getFilename());
-		
 		ServletOutputStream sos = response.getOutputStream();
 		
 		byte[] buffer = new byte[512];
@@ -46,6 +50,7 @@ public class ProfileServlet extends HttpServlet {
 		while(fis.read(buffer) != -1) {
 			sos.write(buffer);
 		}
+		
 		
 		fis.close();
 		sos.flush();

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class FileUploadUtil {
 	
+	private static final Logger logger = LoggerFactory.getLogger(FileUploadUtil.class);
 	// form-data; name="img"; filename="5.png"
 	// ==> 5.png
 	
@@ -22,5 +23,15 @@ public class FileUploadUtil {
 			}
 		}
 		return "";
+	}
+	
+	// filename : sally.png ==> png
+	public static String getExtension(String filename) {
+		
+		if(filename == null || filename.indexOf(".") == -1) {
+			return "";
+		}else {
+			return filename.split("[.]")[1];
+		}
 	}
 }
