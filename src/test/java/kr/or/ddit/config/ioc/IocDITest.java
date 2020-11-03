@@ -37,7 +37,7 @@ public class IocDITest {
 	
 	@Resource(name="person")
 	Person person;
-	
+	 
 	// person 스프링 빈의 age(value), boardRepository(ref) 두 속성에 주입이 잘 되었는지 확인
 	
 	@Test
