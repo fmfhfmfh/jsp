@@ -1,4 +1,4 @@
-package kr.or.ddit.fileupload.web;
+package kr.or.ddit.mvc.fileupload.web;
 
 
 import java.io.File;
@@ -34,7 +34,7 @@ public class FileUploadController {
 	@RequestMapping("/upload")
 	public String upload(String userid, String usernm, @RequestPart("file") MultipartFile file) {
 		logger.debug("userid : {}", userid);
-		logger.debug("name : {} / filename : {} / size : {}", file.getName(), file.getOriginalFilename(), file.getSize());
+		logger.debug("name : {} / filename : {} / size  : {}", file.getName(), file.getOriginalFilename(), file.getSize());
 		
 		File uploadFile = new File("d:\\upload\\" + file.getOriginalFilename());
 		try {
