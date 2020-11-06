@@ -10,11 +10,13 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.fileUpload.FileUploadUtil;
+import kr.or.ddit.member.model.JSRMemberVO;
 import kr.or.ddit.member.model.MemberVO;
+import kr.or.ddit.member.model.MemberVOValidator;
 import kr.or.ddit.member.service.MemberServiceI;
 
 @RequestMapping("/member")
@@ -38,8 +42,11 @@ public class MemberController {
 	
 	@RequestMapping("/member")
 	public String getMember(String userid, Model model) {
+		
 		MemberVO mv = memberService.getMember(userid);
+		
 		model.addAttribute("mv", mv);
+		
 		return "member/member";
 	}
 	
@@ -79,8 +86,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping(path="/memberRegist", method ={RequestMethod.POST})
-	public String memberRegist(MemberVO mv, @RequestPart("realfile") MultipartFile profile) {
+	public String memberRegist(@Valid MemberVO mv, BindingResult br, @RequestPart("realfile") MultipartFile profile) {
+//	public String memberRegist(@Valid JSRMemberVO mv, BindingResult br, @RequestPart("realfile") MultipartFile profile) {
+
+		// new MemberVOValidator().validate(mv, br);
 		
+		// 검증을 통과하지 못했으므로 사용자 등록 화면으로 이동
+		if(br.hasErrors()) {
+			return "member/memberRegist";
+		}
 		
 		String realFileName = profile.getOriginalFilename();
 		String ext = FileUploadUtil.getExtension(realFileName);
