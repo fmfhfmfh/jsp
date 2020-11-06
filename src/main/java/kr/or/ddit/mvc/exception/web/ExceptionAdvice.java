@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import kr.or.ddit.mvc.exception.NoFileException;
+
 @ControllerAdvice
 public class ExceptionAdvice {
 	
@@ -17,6 +19,5 @@ public class ExceptionAdvice {
 		// 에러를 처리할 화면
 		return "exception/arithmetic";
 	}
-	
 	
 }

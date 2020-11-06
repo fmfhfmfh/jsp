@@ -37,8 +37,6 @@ public class ExceptionController {
 	}
 	
 	
-	
-	
 //	@ExceptionHandler({ArithmeticException.class})
 //	public String Handler() {
 //		logger.debug("ExceptionController.handler()");
