@@ -17,7 +17,7 @@
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 	
-	
+	<bean id="excelView" class="kr.or.ddit.mvc.view.ExcelDownloadView"/>
 	<bean id="profileImgView" class="kr.or.ddit.mvc.view.ProfileImgView"/>
 	<bean id="downloadView" class="kr.or.ddit.mvc.view.DownloadView"/>
 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
