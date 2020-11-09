@@ -47,7 +47,7 @@ public class MemberController {
 		
 		model.addAttribute("mv", mv);
 		
-		return "member/member";
+		return "tiles/member/memberContent";
 	}
 	
 	@RequestMapping("/memberList")
@@ -58,13 +58,14 @@ public class MemberController {
 		model.addAttribute("list", map.get("memberList"));
 		model.addAttribute("pages", map.get("pages"));
 		
-		return "member/memberList";
+//		return "member/memberList";
+		return "tiles/member/memberListContent";
 	}
 	
 	
 	@RequestMapping(path="/memberRegist", method ={RequestMethod.GET})
 	public String memberRegistView() {
-		return "member/memberRegist";
+		return "tiles/member/memberRegistContent";
 	}
 	
 	@RequestMapping(path="/memberRegist", method ={RequestMethod.POST})
@@ -75,7 +76,7 @@ public class MemberController {
 		
 		// 검증을 통과하지 못했으므로 사용자 등록 화면으로 이동
 		if(br.hasErrors()) {
-			return "member/memberRegist";
+			return "tiles/member/memberRegistContent";
 		}
 		
 		String realFileName = profile.getOriginalFilename();
@@ -100,7 +101,7 @@ public class MemberController {
 		if(cnt == 1) {
 			return "redirect:/member/memberList";
 		}else {
-			return "member/memberRegist";
+			return "tiles/member/memberRegistContent";
 		}
 		
 	}
@@ -112,7 +113,7 @@ public class MemberController {
 		
 		model.addAttribute("mv", mv);
 		
-		return "member/memberUpdate";
+		return "tiles/member/memberUpdateContent";
 	}
 	
 	@RequestMapping(path="/memberUpdate", method = {RequestMethod.POST})
@@ -145,7 +146,7 @@ public class MemberController {
 		if(cnt == 1) {
 			return "redirect:/member/member?userid="+userid;
 		}else {
-			return "member/memberUpdate";
+			return "tiles/member/memberUpdateContent";
 		}
 	}
 }
