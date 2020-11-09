@@ -1,4 +1,4 @@
-package kr.or.ddit.member.controller;
+package kr.or.ddit.member.web;
 
 import java.io.FileInputStream;
 import java.io.IOException;

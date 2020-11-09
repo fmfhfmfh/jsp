@@ -1,4 +1,4 @@
-package kr.or.ddit.member.controller;
+package kr.or.ddit.member.web;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +37,7 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Resource(name="memberService")
-	MemberServiceI memberService;
+	private MemberServiceI memberService;
 	
 	
 	@RequestMapping("/member")
@@ -49,24 +49,6 @@ public class MemberController {
 		
 		return "member/member";
 	}
-	
-	@RequestMapping("/profileImg")
-	public void getProfile(String userid, HttpServletResponse response) throws IOException {
-		MemberVO mv = memberService.getMember(userid);
-		FileInputStream fis = new FileInputStream(mv.getFilename());
-		ServletOutputStream sos = response.getOutputStream();
-		
-		byte[] buffer = new byte[512];
-		
-		while(fis.read(buffer) != -1) {
-			sos.write(buffer);
-		}
-		
-		fis.close();
-		sos.flush();
-		sos.close();
-	}
-	
 	
 	@RequestMapping("/memberList")
 	public String listView(@RequestParam(name="page", required = false, defaultValue = "1") int page, @RequestParam(name="pageSize", required = false, defaultValue = "5") int pageSize, Model model) {
@@ -166,38 +148,4 @@ public class MemberController {
 			return "member/memberUpdate";
 		}
 	}
-	
-	
-	@RequestMapping(path="/profileDownload")
-	public void profileDownload(String userid, HttpServletResponse response) throws IOException {
-		MemberVO mv = memberService.getMember(userid);
-		
-		response.setHeader("Content-Disposition", "attachment; filename=\""+mv.getRealfilename()+"\"");
-		response.setContentType("application/octet-stream");
-		
-		FileInputStream fis = new FileInputStream(mv.getFilename());
-		ServletOutputStream sos = response.getOutputStream();
-		
-		byte[] buffer = new byte[512];
-		
-		while(fis.read(buffer) != -1) {
-			sos.write(buffer);
-		}
-		
-		fis.close();
-		sos.flush();
-		sos.close();
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

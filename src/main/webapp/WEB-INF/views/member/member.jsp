@@ -24,7 +24,7 @@
 
 		
 		$("#profileDownBtn").on("click", function(){
-			document.location="/member/profileDownload?userid=${mv.userid}";
+			document.location="/downloadView?userid=${mv.userid}";
 		});
 
 	});
@@ -58,7 +58,7 @@
 						<div class="col-sm-10">
 <%-- 							<img src="${cp}/profile/${mv.filename}"/> --%>
 							
-							<img src="${cp}/member/profileImg?userid=${mv.userid}" name="realfile"/><br>
+							<img src="${cp}/profileImgView?userid=${mv.userid}" name="realfile"/><br>
 							<button id="profileDownBtn" type="button" class="btn btn-default">다운로드 : ${mv.realfilename}</button>
 							
 						</div>
