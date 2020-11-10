@@ -7,14 +7,16 @@
 		
 		// client side에서는 server side 변수나 값을 사용가능
 		memberAjax("${param.userid}");
+
+		var userid = "${param.userid}";
 		
 		$("#upbutton").on("click", function(){
-			document.location="/member/memberUpdate?userid=${mv.userid}";
+			document.location="/member/memberUpdate?userid="+userid;
 		});
 
 		
 		$("#profileDownBtn").on("click", function(){
-			document.location="/downloadView?userid=${mv.userid}";
+			document.location="/downloadView?userid="+userid;
 		});
 
 		
@@ -26,9 +28,9 @@
 			data : {userid : userid},
 		    method : "get",
 		    success : function(data){
-				var member = data.memberVO;
+				var member = data.mv;
 			    
-				$("#profile").attr("src","${cp}/profileImgView?userid="+userid);
+				$("#profile").attr("src", "${cp}/profileImgView?userid="+userid);
 			    $("#profileDownBtn").html("다운로드 : " + member.realfilename);
 				$("#userid").html(member.userid);
 				$("#usernm").html(member.usernm);
