@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.common.model.PageVO;
@@ -18,6 +20,7 @@ import kr.or.ddit.member.model.MemberVO;
 
 @Service("memberService")
 public class MemberService implements MemberServiceI {
+	
 	
 	@Resource(name="memberDao")
 	private MemberDaoI memberDao;
