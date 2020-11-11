@@ -18,7 +18,6 @@ import kr.or.ddit.person.model.Person;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:kr/or/ddit/config/spring/ioc/ioc.xml"})
-
 public class IocDITest {
 
 	// ioc.xml을 바탕으로 스프링 빈이 잘 생성되었는지 확인

@@ -21,7 +21,6 @@
 			boardSerivce의 boardDao 속성으로 1번에 생성한 스프링 빈을 setter 메서드를 통해 주입
 	 -->
 	<bean id="boardRepository" class="kr.or.ddit.board.repository.BoardRepository"/>
-	<bean id="memberService" class="kr.or.ddit.member.service.MemberService"/>
 	
 	
 	<bean id="boardService" class="kr.or.ddit.board.service.BoardService">

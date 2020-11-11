@@ -36,13 +36,13 @@ public class MemberDao implements MemberDaoI{
 	}
 
 	@Override
-	public List<MemberVO> selectMemberPageList(SqlSession sqlSession, PageVO pv) {
+	public List<MemberVO> selectMemberPageList(PageVO pv) {
 		
 		return sqlSession.selectList("member.selectMemberPageList", pv);
 	}
 
 	@Override
-	public int selectMemberTotalCnt(SqlSession sqlSession) {
+	public int selectMemberTotalCnt() {
 		
 		return sqlSession.selectOne("member.selectMemberTotalCnt");
 	}
@@ -58,14 +58,6 @@ public class MemberDao implements MemberDaoI{
 		
 		int cnt = sqlSession.delete("member.deleteMember", userid);
 		
-		if(cnt == 1) {
-//			sqlSession.commit();
-		}else {
-//			sqlSession.rollback();
-		}
-		
-//		sqlSession.close();
-		
 		return cnt;
 	}
 
@@ -73,14 +65,6 @@ public class MemberDao implements MemberDaoI{
 	public int updateMember(MemberVO mv) {
 		
 		int cnt = sqlSession.delete("member.updateMember", mv);
-		
-		if(cnt == 1) {
-//			sqlSession.commit();
-		}else {
-//			sqlSession.rollback();
-		}
-		
-//		sqlSession.close();
 		
 		return cnt;
 	}
