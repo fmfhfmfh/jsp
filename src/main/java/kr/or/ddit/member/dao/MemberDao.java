@@ -2,7 +2,10 @@ package kr.or.ddit.member.dao;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.common.model.PageVO;
@@ -12,25 +15,23 @@ import kr.or.ddit.member.model.MemberVO;
 @Repository("memberDao")
 public class MemberDao implements MemberDaoI{
 
+	@Resource(name="sqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
+	
+	
 	@Override
 	public MemberVO getMember(String userId) {
-		SqlSession sqlSession = MybatisUtil.getSession();
 		
 		MemberVO memberVo = sqlSession.selectOne("member.getMember", userId);
-		
-		sqlSession.close();
 		
 		return memberVo;
 	}
 	
 	@Override
 	public List<MemberVO> selectAllMember() {
-		SqlSession sqlSession = MybatisUtil.getSession();
 		
 		List<MemberVO> list = sqlSession.selectList("member.selectAllMember");
 
-		sqlSession.close();
-		
 		return list;
 	}
 
@@ -48,55 +49,38 @@ public class MemberDao implements MemberDaoI{
 
 	@Override
 	public int insertMember(MemberVO mv) {
-		SqlSession sqlSession = MybatisUtil.getSession();
-		int cnt = 0;
-		try {
-			cnt = sqlSession.insert("member.insertMember", mv);
-		}catch (Exception e) {
-			
-		}
 		
-		if(cnt == 1) {
-			sqlSession.commit();
-		}else {
-			sqlSession.rollback();
-		}
-		
-		sqlSession.close();
-		
-		return cnt;
+		return sqlSession.insert("member.insertMember", mv);
 	}
 
 	@Override
 	public int deleteMember(String userid) {
-		SqlSession sqlSession = MybatisUtil.getSession();
 		
 		int cnt = sqlSession.delete("member.deleteMember", userid);
 		
 		if(cnt == 1) {
-			sqlSession.commit();
+//			sqlSession.commit();
 		}else {
-			sqlSession.rollback();
+//			sqlSession.rollback();
 		}
 		
-		sqlSession.close();
+//		sqlSession.close();
 		
 		return cnt;
 	}
 
 	@Override
 	public int updateMember(MemberVO mv) {
-		SqlSession sqlSession = MybatisUtil.getSession();
 		
 		int cnt = sqlSession.delete("member.updateMember", mv);
 		
 		if(cnt == 1) {
-			sqlSession.commit();
+//			sqlSession.commit();
 		}else {
-			sqlSession.rollback();
+//			sqlSession.rollback();
 		}
 		
-		sqlSession.close();
+//		sqlSession.close();
 		
 		return cnt;
 	}
