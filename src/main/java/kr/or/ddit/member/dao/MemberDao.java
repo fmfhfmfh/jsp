@@ -9,7 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.common.model.PageVO;
-import kr.or.ddit.db.MybatisUtil;
+import kr.or.ddit.config.db.MybatisUtil;
 import kr.or.ddit.member.model.MemberVO;
 
 @Repository("memberDao")
